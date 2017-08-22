@@ -1,0 +1,10 @@
+---
+- hosts: sshfs-clients
+  tasks: 
+        - file:
+                state: directory
+                path: "/olkm12"        
+        - yum:
+                name: "fuse-sshfs"
+                state: present
+        - command: echo olkm12 | sshfs olkm12@192.168.43.40:/media/olkm12 /olkm12

@@ -1,0 +1,18 @@
+---
+- hosts: iscsi
+  tasks:
+        - lvol:
+                vg: "storage"
+                lv: "ajhkk"
+                size: "1"
+        - command: partprobe /dev/storage/ajhkk
+        - yum:
+                name: "scsi-target-utils"
+                state: present
+        - copy:
+                src: "/files/tgt.txt" 
+                dest: "/etc/tgt/conf.d/ajhkk.conf" 
+
+        - service:
+                name: "tgtd"
+                state: restarted

@@ -1,0 +1,5 @@
+documentroot /webcontent
+
+<Directory /webcontent>
+require all granted
+</Directory>

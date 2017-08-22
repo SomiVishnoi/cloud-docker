@@ -1,0 +1,14 @@
+---
+- hosts: dockerhttpd
+  tasks:
+     - service:
+          name: "docker"
+          state: started
+     - command: docker run -dit -p 2222:80 --name foo centos:latest 
+     - command: docker start foo
+     - command: docker exec foo yum install httpd -y
+     - copy: 
+          src: "/files/web_conf.txt"
+          dest: "/web_conf.txt"
+     - command: docker cp /web_conf.txt foo:/etc/httpd/conf.d/
+     - command: docker exec foo /usr/sbin/httpd

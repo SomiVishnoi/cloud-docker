@@ -1,0 +1,11 @@
+---
+- hosts: client
+  tasks:
+   - service: 
+       name: "docker"
+       state: started
+   - command: docker run -dit --name ar shellinabox:v1
+   - command: chown apache /usr/share/httpd
+   - command: docker exec ar useradd ar
+   - command: docker exec ar echo ar | passwd ar --stdin
+   - command: docker exec ar su - ar

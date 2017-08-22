@@ -1,0 +1,11 @@
+---
+- hosts: iaas_server
+  tasks:
+      - service: 
+             name: "libvirtd"
+             state: started
+             enabled: yes
+      - command: virt-install  --hvm --name somi --memory 200  --disk=/tmp/somi.img,size=1  --vcpu 1 --cdrom /root/Desktop/RHEL-7.3\ Server.x86_64-dvd.iso  --os-type linux --os-variant rhel7 --graphics vnc,listen=0.0.0.0,port=6666 --noautoconsole
+             
+       
+
